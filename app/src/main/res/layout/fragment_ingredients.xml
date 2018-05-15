@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.IngredientsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="50dp"
+        android:text="@string/add_ingredients"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/ingredientEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeActionId="@integer/send"
+        android:inputType="textPersonName"
+        android:imeActionLabel="@+string/send_label"
+        android:imeOptions="actionSend"
+        android:layout_marginTop="20dp"
+        android:hint="@string/ingredient" />
+
+
+    <ListView
+        android:id="@+id/ingredientListView"
+        android:layout_width="match_parent"
+        android:layout_height="306dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredientsNextButton"
+        android:height="20dp"
+        android:text="@string/next"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
