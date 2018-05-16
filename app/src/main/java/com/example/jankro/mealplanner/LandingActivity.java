@@ -1,12 +1,8 @@
 package com.example.jankro.mealplanner;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,16 +17,17 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.jankro.mealplanner.Activities.AddMealActivity;
+import com.example.jankro.mealplanner.Data.FirebaseDataHandler;
 import com.example.jankro.mealplanner.Data.MealListAdapter;
-import com.example.jankro.mealplanner.Data.MealViewModel;
 import com.example.jankro.mealplanner.Objects.Meal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LandingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private MealViewModel mMealViewModel;
+
 
     public static final int NEW_MEAL_ACTIVITY_REQUEST_CODE = 1;
 
@@ -45,16 +42,9 @@ public class LandingActivity extends AppCompatActivity
         final MealListAdapter adapter = new MealListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mMealViewModel = ViewModelProviders.of(this).get(MealViewModel.class);
-
-        mMealViewModel.getAllMeals().observe(this, new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(@Nullable final List<Meal> meals) {
-                // Update the cached copy of the words in the adapter.
-                adapter.setMeals(meals);
-            }
-        });
+        FirebaseDataHandler dataHandler = new FirebaseDataHandler();
+        List<Meal> meals = dataHandler.getAllMeals();
+        adapter.setMeals(meals);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

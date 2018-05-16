@@ -31,6 +31,8 @@ public class HealthRatingFragment extends Fragment {
     RadioButton mUnhealthyButton;
     Button mNextButton;
 
+    String mChosenRating;
+
     public HealthRatingFragment() {
         // Required empty public constructor
     }
@@ -68,7 +70,8 @@ public class HealthRatingFragment extends Fragment {
             @Override
             public void onClick(View view) {
             int selectedId =  mHealthButtonGroup.getCheckedRadioButtonId();
-            RadioButton chosenRating = view.findViewById(selectedId);
+            RadioButton chosenRating = mHealthButtonGroup.findViewById(selectedId);
+
             onButtonPressed(chosenRating.getText().toString());
 
 
