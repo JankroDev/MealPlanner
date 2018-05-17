@@ -30,9 +30,6 @@ public class FirebaseDataHandler {
         myRef.setValue(meal);
     }
 
-    public void returnMeal(Meal meal) {
-        mMeal = meal;
-    }
 
     public List<Meal> getAllMeals() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meals");

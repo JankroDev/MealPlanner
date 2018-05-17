@@ -1,5 +1,6 @@
 package com.example.jankro.mealplanner.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.jankro.mealplanner.Data.FirebaseDataHandler;
+import com.example.jankro.mealplanner.LandingActivity;
 import com.example.jankro.mealplanner.Objects.Meal;
 import com.example.jankro.mealplanner.R;
 import com.example.jankro.mealplanner.fragments.HealthRatingFragment;
@@ -57,6 +59,8 @@ public class AddMealActivity extends AppCompatActivity implements MealNameFragme
         // Need to add firebase so this can store the ingredients as a list
         Meal mealToAdd = new Meal(0, mMealName, mLikeRating, mHealthRating, mIngredients );
         dataHandler.writeMealToDB(mealToAdd);
+        Intent i = new Intent(this, LandingActivity.class);
+        startActivity(i);
     }
     private void openMealNameFragment(){
         String pass = "";

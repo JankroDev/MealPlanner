@@ -20,6 +20,11 @@ import com.example.jankro.mealplanner.Activities.AddMealActivity;
 import com.example.jankro.mealplanner.Data.FirebaseDataHandler;
 import com.example.jankro.mealplanner.Data.MealListAdapter;
 import com.example.jankro.mealplanner.Objects.Meal;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,7 @@ public class LandingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    public List<Meal> meals = new ArrayList<>();
 
     public static final int NEW_MEAL_ACTIVITY_REQUEST_CODE = 1;
 
@@ -42,8 +48,21 @@ public class LandingActivity extends AppCompatActivity
         final MealListAdapter adapter = new MealListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseDataHandler dataHandler = new FirebaseDataHandler();
-        List<Meal> meals = dataHandler.getAllMeals();
+        //FirebaseDataHandler dataHandler = new FirebaseDataHandler();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meals");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Meal meal = dataSnapshot.getValue(Meal.class);
+                meals.add(meal);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         adapter.setMeals(meals);
 
 
